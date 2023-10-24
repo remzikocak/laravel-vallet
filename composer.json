@@ -23,7 +23,8 @@
     "mockery/mockery": "^1.5",
     "pestphp/pest": "^1.22",
     "phpunit/phpunit": "^9.5.24",
-    "orchestra/testbench": "^7.0|^8.0"
+    "orchestra/testbench": "^7.0|^8.0",
+    "laravel/pint": "v1.13"
   },
   "autoload": {
     "psr-4": {
