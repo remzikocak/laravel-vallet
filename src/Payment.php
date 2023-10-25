@@ -26,6 +26,8 @@ class Payment implements Arrayable, PaymentContract
 
     protected ?Locale $locale = null;
 
+    protected array $products = [];
+
     protected array $requiredFields = [
         'productName', 'productData', 'productsTotalPrice', 'orderPrice', 'orderId', 'conversationId',
     ];
@@ -100,6 +102,16 @@ class Payment implements Arrayable, PaymentContract
     public function setProductType(ProductType $type): self
     {
         return $this->setData('productType', $type->value);
+    }
+
+    public function setOrderPrice(float|int $price): self
+    {
+        return $this->setData('orderPrice', $price);
+    }
+
+    public function setProductsTotalPrice(float|int $price): self
+    {
+        return $this->setData('productsTotalPrice', $price);
     }
 
     /**
