@@ -1,57 +1,79 @@
 {
-  "name": "remzikocak/laravel-vallet",
-  "description": "Vallet Payment Gateway for Laravel",
-  "type": "library",
-  "license": "MIT",
-  "keywords": [
-    "vallet",
-    "payment",
-    "laravel-vallet"
-  ],
-  "authors": [
-    {
-      "name": "Remzi Kocak",
-      "email": "hey@remzikocak.com"
+    "name": "remzikocak/laravel-vallet",
+    "description": "Vallet Payment Gateway for Laravel",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "vallet",
+        "payment",
+        "laravel-vallet"
+    ],
+    "authors": [
+        {
+            "name": "Remzi Kocak",
+            "email": "hey@remzikocak.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^8.2",
+        "illuminate/translation": "^10",
+        "illuminate/support": "^10"
+    },
+    "require-dev": {
+        "mockery/mockery": "^1.5",
+        "pestphp/pest": "^1.22",
+        "phpunit/phpunit": "^9.5.24",
+        "orchestra/testbench": "^8.0",
+        "laravel/pint": "v1.13"
+    },
+    "autoload": {
+        "psr-4": {
+            "RKocak\\Vallet\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "RKocak\\Vallet\\Tests\\": "tests/",
+            "Workbench\\App\\": "workbench/app/",
+            "Workbench\\Database\\Factories\\": "workbench/database/factories/",
+            "Workbench\\Database\\Seeders\\": "workbench/database/seeders/"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "RKocak\\Vallet\\ValletServiceProvider"
+            ],
+            "aliases": {
+                "Options": "RKocak\\Vallet\\Facades\\Payment"
+            }
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "@clear",
+            "@prepare"
+        ],
+        "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
+        "prepare": "@php vendor/bin/testbench package:discover --ansi",
+        "build": "@php vendor/bin/testbench workbench:build --ansi",
+        "serve": [
+            "@build",
+            "@php vendor/bin/testbench serve"
+        ],
+        "lint": [
+            "@php vendor/bin/pint"
+        ],
+        "test": [
+            "@php vendor/bin/pest"
+        ]
     }
-  ],
-  "minimum-stability": "dev",
-  "prefer-stable": true,
-  "require": {
-    "php": "^8.2",
-    "illuminate/translation": "^10",
-    "illuminate/support": "^10"
-  },
-  "require-dev": {
-    "mockery/mockery": "^1.5",
-    "pestphp/pest": "^1.22",
-    "phpunit/phpunit": "^9.5.24",
-    "orchestra/testbench": "^7.0|^8.0",
-    "laravel/pint": "v1.13"
-  },
-  "autoload": {
-    "psr-4": {
-      "RKocak\\Vallet\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "RKocak\\Vallet\\Tests\\": "tests/"
-    }
-  },
-  "config": {
-    "sort-packages": true,
-    "allow-plugins": {
-      "pestphp/pest-plugin": true
-    }
-  },
-  "extra": {
-    "laravel": {
-      "providers": [
-        "RKocak\\Vallet\\ValletServiceProvider"
-      ],
-      "aliases": {
-        "Options": "RKocak\\Vallet\\Facades\\Payment"
-      }
-    }
-  }
 }
