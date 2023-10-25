@@ -18,6 +18,8 @@ class ValletServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/vallet.php' => config_path('vallet.php'),
         ], 'config');
+
+        $this->mergeConfigFrom(__DIR__.'/../config/vallet.php', 'vallet');
     }
 
     public function provides(): array
