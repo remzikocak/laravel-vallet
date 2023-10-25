@@ -53,7 +53,7 @@
                 "RKocak\\Vallet\\ValletServiceProvider"
             ],
             "aliases": {
-                "Options": "RKocak\\Vallet\\Facades\\Payment"
+                "Vallet": "RKocak\\Vallet\\Facades\\Vallet"
             }
         }
     },
