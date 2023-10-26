@@ -25,4 +25,12 @@
             <clover outputFile="build/logs/clover.xml"/>
         </report>
     </coverage>
+    <php>
+        <env name="VALLET_USERNAME" value="api"/>
+        <env name="VALLET_PASSWORD" value="2b810e90c7e355f8fc8d8365f4d24d865bc94dbe"/>
+        <env name="VALLET_SHOPCODE" value="2298"/>
+        <env name="VALLET_HASH" value="E5S5E2S2E"/>
+        <env name="VALLET_CALLBACK_OK_URL" value="/vallet/callback/ok"/>
+        <env name="VALLET_CALLBACK_FAIL_URL" value="/vallet/callback/fail"/>
+    </php>
 </phpunit>
