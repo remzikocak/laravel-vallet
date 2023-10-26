@@ -20,6 +20,11 @@ class ValletServiceProvider extends ServiceProvider
         ], 'config');
 
         $this->mergeConfigFrom(__DIR__.'/../config/vallet.php', 'vallet');
+
+        $this->publishes([
+            __DIR__.'/../lang' => resource_path('lang/vendor/vallet'),
+        ], 'lang');
+        $this->loadTranslationsFrom(__DIR__.'/../lang', 'vallet');
     }
 
     public function provides(): array
