@@ -14,10 +14,13 @@ use RKocak\Vallet\Exceptions\{BuyerNotSetException,
     InvalidArgumentException,
     LocaleNotSetException,
     RequestFailedException};
+use RKocak\Vallet\Traits\URLHelper;
 use SensitiveParameter;
 
 class Payment implements Arrayable, PaymentContract
 {
+    use URLHelper;
+
     const VALLET_URL = 'https://www.vallet.com.tr/api/v1/create-payment-link';
 
     protected ?Buyer $buyer = null;
@@ -34,7 +37,7 @@ class Payment implements Arrayable, PaymentContract
 
     protected array $data = [
         'productName'        => null,
-        'productData'        => null,
+        'productData'        => [],
         'productType'        => null,
         'productsTotalPrice' => 0,
         'orderPrice'         => 0,
@@ -109,7 +112,7 @@ class Payment implements Arrayable, PaymentContract
         return $this->setData('orderPrice', $price);
     }
 
-    public function setProductsTotalPrice(float|int $price): self
+    public function setTotalPrice(float|int $price): self
     {
         return $this->setData('productsTotalPrice', $price);
     }
@@ -119,7 +122,7 @@ class Payment implements Arrayable, PaymentContract
      */
     public function addProduct(Product $product): PaymentContract
     {
-        $this->products[] = $product->toArray();
+        $this->data['productData'][] = $product->toArray();
 
         return $this;
     }
@@ -159,7 +162,7 @@ class Payment implements Arrayable, PaymentContract
      * @throws LocaleNotSetException
      * @throws RequestFailedException
      */
-    public function createLink(): string
+    public function getLink(): string
     {
         $request = Http::withoutVerifying()
             ->asForm()
@@ -239,14 +242,5 @@ class Payment implements Arrayable, PaymentContract
     protected function getCallbackFailUrl(): string
     {
         return $this->toFullUrl($this->callbackFailUrl);
-    }
-
-    protected function toFullUrl(string $path): string
-    {
-        if (Str::startsWith($path, 'http')) {
-            return $path;
-        }
-
-        return url($path);
     }
 }

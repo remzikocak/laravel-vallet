@@ -21,7 +21,7 @@ interface PaymentContract
 
     public function setOrderId(string $orderId): self;
 
-    public function setProductsTotalPrice(int|float $price): self;
+    public function setTotalPrice(int|float $price): self;
 
     public function setOrderPrice(int|float $price): self;
 
@@ -31,5 +31,5 @@ interface PaymentContract
 
     public function toArray(): array;
 
-    public function createLink(): string;
+    public function getLink(): string;
 }
