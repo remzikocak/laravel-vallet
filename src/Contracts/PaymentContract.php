@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace RKocak\Vallet\Contracts;
 
-use RKocak\Vallet\Buyer;
 use RKocak\Vallet\Enums\{Currency, Locale, ProductType};
+use RKocak\Vallet\{Buyer, Product};
 
 interface PaymentContract
 {
@@ -26,6 +26,8 @@ interface PaymentContract
     public function setOrderPrice(int|float $price): self;
 
     public function setProductType(ProductType $type): self;
+
+    public function addProduct(Product $product): self;
 
     public function toArray(): array;
 

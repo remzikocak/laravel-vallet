@@ -115,6 +115,16 @@ class Payment implements Arrayable, PaymentContract
     }
 
     /**
+     * @throws InvalidArgumentException
+     */
+    public function addProduct(Product $product): PaymentContract
+    {
+        $this->products[] = $product->toArray();
+
+        return $this;
+    }
+
+    /**
      * @throws BuyerNotSetException
      * @throws CurrencyNotSetException
      * @throws InvalidArgumentException
@@ -128,10 +138,12 @@ class Payment implements Arrayable, PaymentContract
             'username'        => $this->username,
             'password'        => $this->password,
             'shopCode'        => $this->shopCode,
-            'callbackOkUrl'   => $this->callbackOkUrl,
-            'callbackFailUrl' => $this->callbackFailUrl,
+            'callbackOkUrl'   => $this->getCallbackOkUrl(),
+            'callbackFailUrl' => $this->getCallbackFailUrl(),
             'currency'        => $this->currency->value,
             'locale'          => $this->locale->value,
+            'productData'     => $this->products,
+            'productName'     => $this->data['productName'],
         ];
 
         return array_merge(
@@ -217,5 +229,24 @@ class Payment implements Arrayable, PaymentContract
         $str = $this->data['orderId'].$this->data['currency'].$this->data['orderPrice'].$this->data['productsTotalPrice'].$this->data['productType'].$this->callbackOkUrl.$this->callbackFailUrl;
 
         return base64_encode(pack('H*', sha1($this->username.$this->password.$this->shopCode.$str.$this->hash)));
+    }
+
+    protected function getCallbackOkUrl(): string
+    {
+        return $this->toFullUrl($this->callbackOkUrl);
+    }
+
+    protected function getCallbackFailUrl(): string
+    {
+        return $this->toFullUrl($this->callbackFailUrl);
+    }
+
+    protected function toFullUrl(string $path): string
+    {
+        if (Str::startsWith($path, 'http')) {
+            return $path;
+        }
+
+        return url($path);
     }
 }
