@@ -19,7 +19,8 @@
     "require": {
         "php": "^8.2",
         "illuminate/translation": "^10",
-        "illuminate/support": "^10"
+        "illuminate/support": "^10",
+        "guzzlehttp/guzzle": "^7.2"
     },
     "require-dev": {
         "mockery/mockery": "^1.5",
