@@ -24,8 +24,12 @@ class RefundResponse implements Arrayable
         return ! $this->success();
     }
 
-    public function getExtraData(): ?array
+    public function getExtraData(string $key = null): ?array
     {
+        if (! empty($key)) {
+            return $this->valletResponse['extraData'][$key] ?? null;
+        }
+
         return $this->valletResponse['extraData'] ?? null;
     }
 
