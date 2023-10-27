@@ -46,48 +46,55 @@ use RKocak\Vallet\Buyer;
 use RKocak\Vallet\Enums\{Currency, Locale, ProductType};
 use RKocak\Vallet\Exceptions\{RequestFailedException, InvalidArgumentException, BuyerNotSetException, LocaleNotSetException, CurrencyNotSetException};
 
-// Create a new buyer object
-$buyer = new Buyer();
-$buyer->setName('Remzi')
-      ->setSurname('Kocak')
-      ->setEmail('hey@remzikocak.com')
-      ->setCity('Istanbul')
-      ->setCountry('Turkey')
-      ->setDistrict('Atasehir')
-      ->setPhoneNumber('5555555555')
-      ->setAddress('Atasehir, Istanbul')
-      ->setIp('127.0.0.1');
+class YourController {
 
-// Create a new payment object
-$payment = Vallet::createPayment();
-
-// Set Payment Details
-$payment->setBuyer($buyer)
-        ->setLocale(Locale::Turkish)
-        ->setCurrency(Currency::Try)
-        ->setConversationId('123456789')
-        ->setOrderId('123456789')
-        ->setProductName('Test Product')
-        ->setTotalPrice(100)
-        ->setOrderPrice(100)
-        ->setProductType(ProductType::Digital);
+    public function yourMethod()
+    {
+        // Create a new buyer object
+        $buyer = new Buyer();
+        $buyer->setName('Remzi')
+              ->setSurname('Kocak')
+              ->setEmail('hey@remzikocak.com')
+              ->setCity('Istanbul')
+              ->setCountry('Turkey')
+              ->setDistrict('Atasehir')
+              ->setPhoneNumber('5555555555')
+              ->setAddress('Atasehir, Istanbul')
+              ->setIp('127.0.0.1');
         
-// Add Products
-$payment->addProduct(
-    Product::make()
-        ->setName('Test Product')
-        ->setPrice(13.50)
-        ->setType(ProductType::Digital)
-);
+        // Create a new payment object
+        $payment = Vallet::createPayment();
+        
+        // Set Payment Details
+        $payment->setBuyer($buyer)
+                ->setLocale(Locale::Turkish)
+                ->setCurrency(Currency::Try)
+                ->setConversationId('123456789')
+                ->setOrderId('123456789')
+                ->setProductName('Test Product')
+                ->setTotalPrice(100)
+                ->setOrderPrice(100)
+                ->setProductType(ProductType::Digital);
+                
+        // Add Products
+        $payment->addProduct(
+            Product::make()
+                ->setName('Test Product')
+                ->setPrice(13.50)
+                ->setType(ProductType::Digital)
+        );
+        
+        try {
+            // Send Payment Request
+            $paymentLink = $payment->getLink();
+            
+            // You can redirect user to '$paymentLink' or you can use it as a href in your button
+            // Depending on your needs
+        } catch (RequestFailedException|InvalidArgumentException|BuyerNotSetException|LocaleNotSetException|CurrencyNotSetException $e) {
+            // Handle Exception
+        }    
+    }
 
-try {
-    // Send Payment Request
-    $paymentLink = $payment->getLink();
-    
-    // You can redirect user to '$paymentLink' or you can use it as a href in your button
-    // Depending on your needs
-} catch (RequestFailedException|InvalidArgumentException|BuyerNotSetException|LocaleNotSetException|CurrencyNotSetException $e) {
-    // Handle Exception
 }
 ```
 
@@ -97,24 +104,31 @@ try {
 use RKocak\Vallet\Facades\Vallet;
 use RKocak\Vallet\Exceptions\{InvalidHashException, InvalidResponseException};
 
-try {
-    // Retrieve Payment Details
-    $response = Vallet::getResponse();
-    $reponse->validate();
-    
-    
-    if($response->isPaid()) {
-        // Payment is paid
-        $amount = $response->getAmount();
-        $orderId = $response->getOrderId();
-        $valletOrderId = $response->getValletOrderId();
-        
-        // Update your order status, send email etc.
-    } else {
-        // Payment is not paid, is pending or is awaiting verification
+class YourController
+{
+
+    public function yourMethod(){
+        try {
+            // Retrieve Payment Details
+            $response = Vallet::getResponse();
+            $reponse->validate();
+            
+            
+            if($response->isPaid()) {
+                // Payment is paid
+                $amount = $response->getAmount();
+                $orderId = $response->getOrderId();
+                $valletOrderId = $response->getValletOrderId();
+                
+                // Update your order status, send email etc.
+            } else {
+                // Payment is not paid, is pending or is awaiting verification
+            }
+        } catch (InvalidHashException|InvalidResponseException $e) {
+            // Handle Exception
+        }
     }
-} catch (InvalidHashException|InvalidResponseException $e) {
-    // Handle Exception
+
 }
 ```
 
@@ -125,24 +139,31 @@ try {
 ```php
 use RKocak\Vallet\Facades\Vallet;
 
-$refund = Vallet::createRefund();
+class YourController {
 
-try {
-    // Set Refund Details
-    $refund->setOrderId('123456789')
-           ->setValletOrderId('123456789')
-           ->setAmount(100);
-    
-    // Send Refund Request
-    $response = $refund->process();
-    
-    if($response->success()) {
-        $refundId = $response->getRefundId();
-    } else {
-        // Refund is not successful
+    public function yourMethod()
+    {
+        $refund = Vallet::createRefund();
+
+        try {
+            // Set Refund Details
+            $refund->setOrderId('123456789')
+                   ->setValletOrderId('123456789')
+                   ->setAmount(100);
+            
+            // Send Refund Request
+            $response = $refund->process();
+            
+            if($response->success()) {
+                $refundId = $response->getRefundId();
+            } else {
+                // Refund is not successful
+            }
+        } catch (InvalidArgumentException $e) {
+            // Handle Exception
+        }
     }
-} catch (InvalidArgumentException $e) {
-    // Handle Exception
+
 }
 ```
 
