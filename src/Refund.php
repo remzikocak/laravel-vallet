@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace RKocak\Vallet;
 
+use Illuminate\Support\Facades\Http;
 use RKocak\Vallet\Contracts\RefundContract;
-use RKocak\Vallet\Exceptions\InvalidArgumentException;
+use RKocak\Vallet\Exceptions\{InvalidArgumentException, RequestFailedException};
 use SensitiveParameter;
 
 class Refund implements RefundContract
@@ -48,16 +49,39 @@ class Refund implements RefundContract
         return $this;
     }
 
-    public function refund(): void
+    /**
+     * @throws InvalidArgumentException
+     */
+    public function process(): RefundResponse
     {
         if (! $this->amount) {
             throw new InvalidArgumentException(__('Amount is required'));
         }
 
-        if (! $this->orderId && ! $this->valletOrderId) {
+        if (! $this->orderId || ! $this->valletOrderId) {
             throw new InvalidArgumentException(__('Order ID is required'));
         }
 
-        $hash = $post['userName'].$post['password'].$post['shopCode'].$post['valletOrderId'].$post['orderId'].$post['amount'].$hashKey;
+        $hashStr = $this->username.$this->password.$this->shopCode.$this->valletOrderId.$this->orderId.$this->amount.$this->hash;
+        $hash    = base64_encode(pack('H*', sha1($hashStr)));
+
+        $request = Http::withoutVerifying()->asForm()->post(static::VALLET_REFUND_URL, [
+            'userName'      => $this->username,
+            'password'      => $this->password,
+            'shopCode'      => $this->shopCode,
+            'valletOrderId' => $this->valletOrderId,
+            'orderId'       => $this->orderId,
+            'amount'        => $this->amount,
+            'hash'          => $hash,
+            'hashString'    => $hashStr,
+        ]);
+
+        if ($request->failed()) {
+            throw new RequestFailedException(__('Request failed'));
+        }
+
+        return new RefundResponse(
+            $request->json()
+        );
     }
 }

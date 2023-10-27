@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Illuminate\Support\Facades\Http;
 use RKocak\Vallet\Tests\TestCase;
-use RKocak\Vallet\{Buyer, Payment};
+use RKocak\Vallet\{Buyer, Payment, Refund};
 
 uses(TestCase::class)->in(__DIR__.'/Feature');
 
@@ -15,6 +15,17 @@ function forceValletResponse(string $status = 'success', string $message = '', i
             'status'           => $status,
             'errorMessage'     => $message,
             'payment_page_url' => 'https://www.vallet.com.tr/fake-payment-page-url',
+        ], $httpStatus),
+    ]);
+}
+
+function forceValletRefundRequest(string $status = 'success', string $message = '', array $extraData = [], int $httpStatus = 200): void
+{
+    Http::fake([
+        Refund::VALLET_REFUND_URL.'*' => Http::response([
+            'status'       => $status,
+            'errorMessage' => $message,
+            'extraData'    => $extraData,
         ], $httpStatus),
     ]);
 }
