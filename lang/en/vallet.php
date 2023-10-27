@@ -19,4 +19,5 @@ return [
     'requestFailed'         => 'Request failed.',
     'invalidEmail'          => 'Invalid email address.',
     'invalidIpAddress'      => 'Invalid IP address.',
+    'invalidHash'           => 'Invalid hash.',
 ];

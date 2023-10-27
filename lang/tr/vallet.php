@@ -19,4 +19,5 @@ return [
     'requestFailed'         => 'İstek başarısız oldu.',
     'invalidEmail'          => 'Geçersiz e-posta adresi.',
     'invalidIpAddress'      => 'Geçersiz IP adresi.',
+    'invalidHash'           => 'Geçersiz hash.',
 ];

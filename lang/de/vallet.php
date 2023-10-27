@@ -19,4 +19,5 @@ return [
     'requestFailed'         => 'Anfrage fehlgeschlagen.',
     'invalidEmail'          => 'Ungültige E-Mail-Adresse.',
     'invalidIpAddress'      => 'Ungültige IP-Adresse.',
+    'invalidHash'           => 'Ungültiger Hash.',
 ];

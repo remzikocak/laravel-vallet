@@ -27,7 +27,7 @@ class Response implements ResponseContract
     {
         foreach ($this->responseFields as $fieldName) {
             if (! request()->has($fieldName) || empty(request()->input($fieldName))) {
-                throw new InvalidResponseException(__('Response field :field is missing.', ['field' => $fieldName]));
+                throw new InvalidResponseException(__('vallet::vallet.fieldNotSet', ['field' => $fieldName]));
             }
         }
 
@@ -41,7 +41,7 @@ class Response implements ResponseContract
         $generatedHash = base64_encode(pack('H*', sha1($hashStr)));
 
         if ($generatedHash !== request()->input('hash')) {
-            throw new InvalidHashException(__('Hash is invalid.'));
+            throw new InvalidHashException(__('vallet::vallet.invalidHash'));
         }
     }
 
