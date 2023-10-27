@@ -70,11 +70,14 @@ class Product implements Arrayable
         ];
     }
 
+    /**
+     * @throws Exceptions\InvalidArgumentException
+     */
     protected function validate(): void
     {
         foreach (['price', 'name', 'type'] as $attr) {
             if (empty($this->{$attr})) {
-                throw new Exceptions\InvalidArgumentException(__('Product attribute :attribute is not set.', ['attribute' => $attr]));
+                throw new Exceptions\InvalidArgumentException(__('vallet::vallet.attrNotSet', compact('attr')));
             }
         }
     }

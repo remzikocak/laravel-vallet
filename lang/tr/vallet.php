@@ -20,4 +20,5 @@ return [
     'invalidEmail'          => 'Geçersiz e-posta adresi.',
     'invalidIpAddress'      => 'Geçersiz IP adresi.',
     'invalidHash'           => 'Geçersiz hash.',
+    'attrNotSet'            => 'Özellik :attr ayarlanmış olmalıdır.',
 ];

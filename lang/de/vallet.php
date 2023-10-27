@@ -20,4 +20,5 @@ return [
     'invalidEmail'          => 'Ungültige E-Mail-Adresse.',
     'invalidIpAddress'      => 'Ungültige IP-Adresse.',
     'invalidHash'           => 'Ungültiger Hash.',
+    'attrNotSet'            => 'Attribut :attr muss festgelegt sein.',
 ];
