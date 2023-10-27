@@ -7,10 +7,13 @@ namespace RKocak\Vallet;
 use Illuminate\Support\Facades\Http;
 use RKocak\Vallet\Contracts\RefundContract;
 use RKocak\Vallet\Exceptions\{InvalidArgumentException, RequestFailedException};
+use RKocak\Vallet\Traits\HashesString;
 use SensitiveParameter;
 
 class Refund implements RefundContract
 {
+    use HashesString;
+
     const VALLET_REFUND_URL = 'https://www.vallet.com.tr/api/v1/create-refund';
 
     protected float|int $amount = 0;
@@ -63,7 +66,7 @@ class Refund implements RefundContract
         }
 
         $hashStr = $this->username.$this->password.$this->shopCode.$this->valletOrderId.$this->orderId.$this->amount.$this->hash;
-        $hash    = base64_encode(pack('H*', sha1($hashStr)));
+        $hash    = $this->generateHash($hashStr);
 
         $request = Http::withoutVerifying()->asForm()->post(static::VALLET_REFUND_URL, [
             'userName'      => $this->username,

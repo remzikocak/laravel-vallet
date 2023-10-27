@@ -14,12 +14,12 @@ use RKocak\Vallet\Exceptions\{BuyerNotSetException,
     InvalidArgumentException,
     LocaleNotSetException,
     RequestFailedException};
-use RKocak\Vallet\Traits\URLHelper;
+use RKocak\Vallet\Traits\{HashesString, URLHelper};
 use SensitiveParameter;
 
 class Payment implements Arrayable, PaymentContract
 {
-    use URLHelper;
+    use HashesString, URLHelper;
 
     const VALLET_URL = 'https://www.vallet.com.tr/api/v1/create-payment-link';
 
@@ -231,7 +231,7 @@ class Payment implements Arrayable, PaymentContract
     {
         $str = $this->data['orderId'].$this->data['currency'].$this->data['orderPrice'].$this->data['productsTotalPrice'].$this->data['productType'].$this->callbackOkUrl.$this->callbackFailUrl;
 
-        return base64_encode(pack('H*', sha1($this->username.$this->password.$this->shopCode.$str.$this->hash)));
+        return $this->generateHash($this->username.$this->password.$this->shopCode.$str.$this->hash);
     }
 
     protected function getCallbackOkUrl(): string
