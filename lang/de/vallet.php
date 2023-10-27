@@ -9,6 +9,19 @@ return [
         'YURT_DISI'    => 'Kredit-, Debitkarte (Ausland)',
     ],
 
+    'currency' => [
+        'usd' => 'US-Dollar',
+        'eur' => 'Euro',
+        'try' => 'Türkische Lira',
+    ],
+
+    'locales' => [
+        'turkish' => 'Türkisch',
+        'english' => 'Englisch',
+        'russian' => 'Russisch',
+        'german'  => 'Deutsch',
+    ],
+
     'productNameTooLong'    => 'Produktbezeichnung muss kürzer als 200 Zeichen lang sein.',
     'credentialsNotSet'     => 'Benutzername, Passwort und Shop-Code müssen festgelegt sein.',
     'callbackOkUrlNotSet'   => 'Callback-OK-URL muss festgelegt sein.',

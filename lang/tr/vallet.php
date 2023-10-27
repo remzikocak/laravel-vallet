@@ -9,6 +9,19 @@ return [
         'YURT_DISI'    => 'Yurt Dışı Kredi Kartı',
     ],
 
+    'currency' => [
+        'usd' => 'Amerikan Doları',
+        'eur' => 'Euro',
+        'try' => 'Türk Lirası',
+    ],
+
+    'locales' => [
+        'turkish' => 'Türkçe',
+        'english' => 'İngilizce',
+        'russian' => 'Rusça',
+        'german'  => 'Almanca',
+    ],
+
     'productNameTooLong'    => 'Ürün adı 200 karakterden az veya eşit olmalıdır.',
     'credentialsNotSet'     => 'Kullanıcı adı, şifre ve mağaza kodu ayarlanmış olmalıdır.',
     'callbackOkUrlNotSet'   => 'Başarılı geri çağrı URL ayarlanmış olmalıdır.',
