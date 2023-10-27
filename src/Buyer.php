@@ -150,6 +150,11 @@ class Buyer implements Arrayable
         return $this->surname;
     }
 
+    public function getFullName(): string
+    {
+        return $this->getName().' '.$this->getSurname();
+    }
+
     public function toArray(): array
     {
         return [
