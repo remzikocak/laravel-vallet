@@ -47,7 +47,7 @@ class Buyer implements Arrayable
     public function setEmail(string $email): self
     {
         if (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            throw new InvalidArgumentException(__('Invalid email address.'));
+            throw new InvalidArgumentException(__('vallet::vallet.invalidEmail'));
         }
 
         $this->email = $email;
@@ -72,7 +72,7 @@ class Buyer implements Arrayable
     public function setIp(string $ip): self
     {
         if (! filter_var($ip, FILTER_VALIDATE_IP)) {
-            throw new InvalidArgumentException(__('Invalid ip address.'));
+            throw new InvalidArgumentException(__('vallet::vallet.invalidIpAddress'));
         }
 
         $this->ipAddress = $ip;

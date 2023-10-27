@@ -86,7 +86,7 @@ class Payment implements Arrayable, PaymentContract
     public function setProductName(string $productName): self
     {
         if (Str::length($productName) > 200) {
-            throw new InvalidArgumentException(__('Product name must be less or equal to 200 characters.'));
+            throw new InvalidArgumentException(__('vallet::vallet.productNameTooLong'));
         }
 
         return $this->setData('productName', $productName);
@@ -190,15 +190,15 @@ class Payment implements Arrayable, PaymentContract
     protected function validate(): void
     {
         if (empty($this->username) || empty($this->password) || empty($this->shopCode)) {
-            throw new InvalidArgumentException(__('Username, password and shopCode must be set.'));
+            throw new InvalidArgumentException(__('vallet::vallet.credentialsNotSet'));
         }
 
         if (empty($this->callbackOkUrl)) {
-            throw new InvalidArgumentException(__('Callback ok url must be set.'));
+            throw new InvalidArgumentException(__('vallet::vallet.callbackOkUrlNotSet'));
         }
 
         if (empty($this->callbackFailUrl)) {
-            throw new InvalidArgumentException(__('Callback fail url must be set.'));
+            throw new InvalidArgumentException(__('vallet::vallet.callbackFailUrlNotSet'));
         }
 
         if (is_null($this->buyer)) {
@@ -215,7 +215,7 @@ class Payment implements Arrayable, PaymentContract
 
         foreach ($this->requiredFields as $field) {
             if (empty($this->data[$field])) {
-                throw new InvalidArgumentException("'{$field}' is required.");
+                throw new InvalidArgumentException(__('vallet::vallet.fieldNotSet', ['field' => $field]));
             }
         }
     }

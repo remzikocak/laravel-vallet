@@ -55,11 +55,11 @@ class Refund implements RefundContract
     public function process(): RefundResponse
     {
         if (! $this->amount) {
-            throw new InvalidArgumentException(__('Amount is required'));
+            throw new InvalidArgumentException(__('vallet::vallet.amountNotSet'));
         }
 
         if (! $this->orderId || ! $this->valletOrderId) {
-            throw new InvalidArgumentException(__('Order ID is required'));
+            throw new InvalidArgumentException(__('vallet::vallet.orderIdNotSet'));
         }
 
         $hashStr = $this->username.$this->password.$this->shopCode.$this->valletOrderId.$this->orderId.$this->amount.$this->hash;
@@ -77,7 +77,7 @@ class Refund implements RefundContract
         ]);
 
         if ($request->failed()) {
-            throw new RequestFailedException(__('Request failed'));
+            throw new RequestFailedException(__('vallet::vallet.requestFailed'));
         }
 
         return new RefundResponse(

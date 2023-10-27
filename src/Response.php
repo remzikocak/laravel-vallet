@@ -117,22 +117,22 @@ class Response implements ResponseContract
 
     public function isPaid(): bool
     {
-        return $this->getPaymentStatus() === 'paymentOk';
+        return $this->getStatus() === 'paymentOk';
     }
 
     public function isNotPaid(): bool
     {
-        return $this->getPaymentStatus() === 'paymentNotPaid';
+        return $this->getStatus() === 'paymentNotPaid';
     }
 
     public function isAwaitingVerification(): bool
     {
-        return $this->getPaymentStatus() === 'paymentVerification';
+        return $this->getStatus() === 'paymentVerification';
     }
 
     public function isPending(): bool
     {
-        return $this->getPaymentStatus() === 'paymentWait';
+        return $this->getStatus() === 'paymentWait';
     }
 
     public function getValletOrderId(): int
