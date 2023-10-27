@@ -4,7 +4,7 @@
 
 This Package helps you to integrate [Vallet Payment Gateway](https://vallet.com.tr) in your Laravel Application.
 
-This is an unofficial, third party package.
+***This is an unofficial, third party package.***
 ## Installation
 
 You can install the package via composer:
