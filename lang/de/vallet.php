@@ -22,6 +22,11 @@ return [
         'german'  => 'Deutsch',
     ],
 
+    'productType' => [
+        'digital'  => 'Digitales Produkt',
+        'physical' => 'Physisches Produkt',
+    ],
+
     'productNameTooLong'    => 'Produktbezeichnung muss kürzer als 200 Zeichen lang sein.',
     'credentialsNotSet'     => 'Benutzername, Passwort und Shop-Code müssen festgelegt sein.',
     'callbackOkUrlNotSet'   => 'Callback-OK-URL muss festgelegt sein.',

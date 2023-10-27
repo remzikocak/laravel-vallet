@@ -9,6 +9,11 @@ return [
         'YURT_DISI'    => 'Yurt Dışı Kredi Kartı',
     ],
 
+    'productType' => [
+        'digital'  => 'Dijital Ürün',
+        'physical' => 'Fiziksel Ürün',
+    ],
+
     'currency' => [
         'usd' => 'Amerikan Doları',
         'eur' => 'Euro',
