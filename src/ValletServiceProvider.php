@@ -22,7 +22,7 @@ class ValletServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/vallet.php', 'vallet');
 
         $this->publishes([
-            __DIR__.'/../lang' => resource_path('lang/vendor/vallet'),
+            __DIR__.'/../lang' => lang_path('vendor/vallet'),
         ], 'lang');
         $this->loadTranslationsFrom(__DIR__.'/../lang', 'vallet');
     }
