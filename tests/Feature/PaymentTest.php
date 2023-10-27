@@ -138,6 +138,7 @@ it('throws exception if Vallet server is down', function () {
         ->setProductName('Test Product')
         ->setTotalPrice(100)
         ->setOrderPrice(100)
+        ->setProductType(ProductType::Digital)
         ->addProduct(
             Product::make()
                 ->setName('Test Product')
