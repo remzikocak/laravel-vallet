@@ -215,7 +215,7 @@ class Payment implements Arrayable, PaymentContract
 
         foreach ($this->requiredFields as $field) {
             if (empty($this->data[$field])) {
-                throw new InvalidArgumentException("{$field} is required.");
+                throw new InvalidArgumentException("'{$field}' is required.");
             }
         }
     }
