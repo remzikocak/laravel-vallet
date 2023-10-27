@@ -1,6 +1,6 @@
 {
     "name": "remzikocak/laravel-vallet",
-    "description": "Vallet Payment Gateway for Laravel",
+    "description": "Unofficial Vallet Payment Gateway Integration for Laravel.",
     "type": "library",
     "license": "MIT",
     "keywords": [
