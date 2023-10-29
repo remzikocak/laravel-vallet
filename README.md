@@ -111,7 +111,7 @@ class YourController
         try {
             // Retrieve Payment Details
             $response = Vallet::getResponse();
-            $reponse->validate();
+            $response->validate();
             
             
             if($response->isPaid()) {
