@@ -231,7 +231,7 @@ class Payment implements Arrayable, PaymentContract
     {
         $str = $this->data['orderId'].$this->data['currency'].$this->data['orderPrice'].$this->data['productsTotalPrice'].$this->data['productType'].$this->callbackOkUrl.$this->callbackFailUrl;
 
-        return $this->generateHash($this->username.$this->password.$this->shopCode.$str.$this->hash);
+        return parent::generateHash($this->username.$this->password.$this->shopCode.$str.$this->hash);
     }
 
     protected function getCallbackOkUrl(): string
