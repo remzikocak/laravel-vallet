@@ -1,6 +1,6 @@
 <p align="center"><img src="/laravel-vallet.png" alt="Laravel Options"></p>
 
-# Vallet Integration for Laravel 10
+# Vallet Integration for Laravel 10/11/12
 
 This Package helps you to integrate [Vallet Payment Gateway](https://vallet.com.tr) in your Laravel Application.
 
